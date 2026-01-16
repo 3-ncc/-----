@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>راما 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{
+  margin:0;
+  min-height:100vh;
+  overflow:hidden;
+  background:#ffbef4;
+}
+
+/* الخلفية */
+#bg{
+  position:fixed;
+  inset:0;
+  background:url('https://i.ibb.co/Fk4VVZrC/Beige-Red-Minimalist-Happy-Valentine-s-Day-Love-You-Card-1.png') center/cover no-repeat;
+  filter:blur(5px);
+  z-index:-1;
+}
+
+/* الصفحة */
+.container{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+/* الكرت */
+.card{
+  background:rgba(255,190,244,0.9);
+  border-radius:30px;
+  padding:45px 30px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* زر البداية */
+.start-btn{
+  background:#ff7cc8;
+  border:none;
+  color:white;
+  font-size:20px;
+  padding:16px 45px;
+  border-radius:35px;
+  cursor:pointer;
+}
+
+/* النص */
+#text{
+  font-size:21px;
+  line-height:2;
+  color:#5a003d;
+  white-space:pre-line;
+}
+
+/* الزر المخفي */
+#finalBtn{
+  display:none;
+  margin-top:25px;
+  background:#ff7cc8;
+  color:white;
+  border:none;
+  padding:14px 40px;
+  border-radius:35px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* القلوب */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:#ff7cc8;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-900px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+
+<div class="container">
+  <div class="card" id="card">
+    <h2>🤍 راما</h2>
+    <p>في شي بسيط…<br>لكن من قلبي</p>
+    <br>
+    <button class="start-btn" onclick="start()">اضغطي هنا</button>
+  </div>
+</div>
+
+<audio id="song" src="song4.mp3"></audio>
+
+<script>
+const message =
+"راما 🤍\n\n"+
+"يمكن ما أعرف أرتّب الكلام…\n"+
+"بس أعرف إنك أجمل إحساس\n\n"+
+"صار لنا 128 يوم\n"+
+"وكل يوم معك يزيدني حب\n\n"+
+"وجودك فرق…\n"+
+"وأحبك أكثر مما تتخيلي 🤍";
+
+let i = 0;
+
+function start(){
+  document.getElementById('song').play();
+  document.getElementById('card').innerHTML = `
+    <p id="text"></p>
+    <button id="finalBtn" onclick="final()">🤍 اضغطي هنا</button>
+  `;
+  type();
+  hearts();
+}
+
+function type(){
+  if(i < message.length){
+    document.getElementById('text').innerHTML += message.charAt(i);
+    i++;
+    setTimeout(type,70);
+  } else {
+    setTimeout(()=>{
+      document.getElementById("finalBtn").style.display="inline-block";
+    },1500);
+  }
+}
+
+function hearts(){
+  setInterval(()=>{
+    const h = document.createElement('div');
+    h.className='heart';
+    h.innerHTML='💗';
+    h.style.left=Math.random()*100+'vw';
+    h.style.fontSize=(16+Math.random()*18)+'px';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },350);
+}
+
+function final(){
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#ffbef4;
+      font-family:'Cairo',sans-serif;
+      font-size:30px;
+      color:#5a003d;
+      text-align:center;
+    ">
+      راما 🤍<br><br>
+      هذا الموقع ما كان له معنى<br>
+      إلا يوم دخلتيه…<br><br>
+      أحبك 💗
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
